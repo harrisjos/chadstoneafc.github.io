@@ -135,6 +135,8 @@
             let string = "<tr>";
             let count = 1;
 
+            let bold = false;
+
             //console.log(availableJumbers.length);
             for (let index = 0; index < availableJumbers.length; index++) {
                 const element = availableJumbers[index];
@@ -142,7 +144,12 @@
                 let e = "";
                 if (!element.Allocted) {
 
+                    if(bold) {
+                    e += "<td class='font-weight-bold'>"
+                    } else {
                     e += "<td>"
+                    }
+                    bold = !bold;
                     e += element.Number;
                     e += "</td>"
                     count++;
