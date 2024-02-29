@@ -57,23 +57,28 @@
 
 
             let d = document;
-            let table = d.createElement("table");
-            let tbody = d.createElement("tbody");
-            let thead = d.createElement("thead");
-            thead.classList.add("thead-dark");
-            let headers = ["#", "Player"];
+            //let table = d.createElement("table");
+            //let tbody = d.createElement("tbody");
+            // let thead = d.createElement("thead");
+            // thead.classList.add("thead-dark");
+            // let headers = ["#", "Player"];
 
-            headers.forEach(element => {
-                let head = d.createElement("th");
-                head.innerHTML = element;
-                head.classList.add("text-uppercase");
-                thead.appendChild(head);
-            });
+            let table = d.getElementById('baseTable');
+            let thead = d.getElementById('tableHead');
+            let tbody = d.getElementById('tableBody');
 
-            table.appendChild(thead);
-            table.appendChild(tbody);
-            table.classList.add("table");
-            table.classList.add("table-striped");
+
+            // headers.forEach(element => {
+            //     let head = d.createElement("th");
+            //     head.innerHTML = element;
+            //     head.classList.add("text-uppercase");
+            //     thead.appendChild(head);
+            // });
+
+            //table.appendChild(thead);
+            // table.appendChild(tbody);
+            // table.classList.add("table");
+            // table.classList.add("table-striped");
 
             let availableJumbers = [];
 
@@ -82,34 +87,46 @@
                 availableJumbers.push(numbers);
             };
 
-            //console.log(availableJumbers[33-1]);
+            let rowC = 0;
+            let row = "";
 
             for (let index = 0; index < jumpers.length; index++) {
 
                 const element = jumpers[index];
                 let no = element["AllocatedJumper"];
-                //console.log(no);
                 let allocate = availableJumbers[Number(no) - 1];
-                //console.log(allocate);
-                //return;
 
-                if (no > 0) {
+                if (Number(no) > 0) {
                     try {
                         allocate.Allocted = true;
                     } catch (err) {
                         console.log(element);
                         continue;
                     };
-                    let row = d.createElement("tr");
-                    row.innerHTML = "<td>" + element.AllocatedJumper + "</td>";
+                    if (rowC == 0) {
+                        row = d.createElement("tr");
+                    };
+                    rowC++;
+
+                    row.innerHTML += "<td>" + element.AllocatedJumper + "</td>";
                     row.innerHTML += "<td>" + element["First Name"] + " " + element["Last Name"] + "</td>";
-                    tbody.appendChild(row);
+
+                    if (rowC == 2) {
+                        tbody.appendChild(row);
+                        rowC = 0;
+                    }
+
                 } else {
+                    console.log(element["First Name"]);
                     continue;
                 };
+
+
             };
 
-
+            if (row != "") {
+                tbody.appendChild(row);
+            }
 
             let tableContainer = d.getElementById("tableContainer");
             tableContainer.appendChild(table);
@@ -196,9 +213,9 @@
             });
         }
 
-function forceRefresh() {
-    window.location.reload(true);
-}
+        function forceRefresh() {
+            window.location.reload(true);
+        }
     </script>
 </head>
 
@@ -348,14 +365,32 @@ function forceRefresh() {
         <hr class="hr">
         <div class="row m-2">
             <div class="col-2 offset-5 text-center">
-                <span class="material-symbols-outlined btn btn-success" style="font-size: 3em;" onclick="forceRefresh()">
+                <span class="material-symbols-outlined btn btn-success" style="font-size: 3em;"
+                    onclick="forceRefresh()">
                     autorenew
-                    </span>
+                </span>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-1 col-lg-4"></div>
-            <div class="col-sm-10 col-lg-4" id="tableContainer"></div>
+            <div class="col-sm-10 col-lg-4" id="tableContainer">
+                <table class="table table-striped" id="baseTable">
+                    <thead class="thead-dark" id="tableHead">
+                        <tr>
+                            <th colspan="4" class="text-center">Allocations</th>
+                        </tr>
+                        <tr>
+                            <th>#</th>
+                            <th>Player</th>
+                            <th>#</th>
+                            <th>Player</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+
+                    </tbody>
+                </table>
+            </div>
         </div>
 
         <div class="row">
