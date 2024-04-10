@@ -133,6 +133,8 @@
                 }
                 unallocatedPlayersString += "</ul>";
                 unallocatedPlayersDiv.innerHTML = unallocatedPlayersString;
+                unallocatedPlayersDiv.classList.add("synnerRed-text");
+                unallocatedPlayersDiv.style.display = "block";
             };
 
             if (row != "") {
@@ -449,7 +451,7 @@
             </div>
         </div>
 <div class="row m-4">
-    <div class="col-12" id="unallocatedPlayers">
+    <div class="col-12" id="unallocatedPlayers" style="display: none">
         
     </div>
 </div>
