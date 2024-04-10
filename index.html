@@ -74,7 +74,8 @@
             let tbody = d.getElementById('tableBody');
 
 
-
+            let unallocatedPlayersDiv = d.getElementById("unallocatedPlayers");
+            let unallocatedPlayers = {};
 
             let availableJumbers = [];
 
@@ -105,8 +106,8 @@
                     rowC++;
 
                     row.innerHTML += "<td>" + element.AllocatedJumper + "</td>";
-                    row.innerHTML += "<td>" + element.Role + "</td>";
                     row.innerHTML += "<td>" + element["First Name"] + " " + element["Last Name"] + "</td>";
+                    row.innerHTML += "<td>" + element["Role\r"].replaceAll("\r","").replaceAll("\n","") + "</td>";
 
                     if (rowC == 2) {
                         tbody.appendChild(row);
@@ -115,6 +116,7 @@
 
                 } else {
                     console.log(element["First Name"]);
+                    unallocatedPlayers[element["First Name"]] = element["Last Name"];
                     continue;
                 };
 
@@ -412,11 +414,11 @@
                         </tr>
                         <tr>
                             <th>#</th>
-                            <th></th>
                             <th>Player</th>
+                            <th></th>
                             <th>#</th>
-                            <th></th>
                             <th>Player</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody id="tableBody">
@@ -434,7 +436,11 @@
                 </table>
             </div>
         </div>
-
+<div class="row m-4">
+    <div class="col-12" id="unallocatedPlayers">
+        
+    </div>
+</div>
         <div class="row m-4">
             <div class="col-lg-4 offset-lg-4 col-sm-6 offset-sm-3 text-center">
                 <button class="btn btn-primary btn-pill"
