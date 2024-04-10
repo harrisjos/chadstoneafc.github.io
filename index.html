@@ -37,6 +37,22 @@
             display: inline-block;
             margin-left: 2em;
         }
+
+        .synnerRed-text {
+            color: #c42833;
+        }
+
+        .synnerRed-bg {
+            background-color: #c42833;
+        }
+
+        .synnerBlue-text {
+            color: #030644
+        }
+
+        .synnerBlue-bg {
+            background-color: #030644
+        }
     </style>
     <script>
         function compareFn(b, a) {
@@ -50,35 +66,15 @@
         }
 
         function buildjumperslist(data) {
-            //console.log(JSON.stringify(data[0]));
-            //let jumpers = [{ "number": 33, "name": "ZAC TALBOT" }, { "number": 5, "name": "JAMES VEAL" }, { "number": 16, "name": "ALEX MOODY" }, { "number": 15, "name": "CHRISTOS MILLARAS" }, { "number": 19, "name": "TIM THORBURN" }, { "number": 3, "name": "ANTHONY  BROWN " }, { "number": 7, "name": "CALEB RUDD " }, { "number": 21, "name": "ELIJAH HOYNE" }, { "number": 18, "name": "JACK TREVETHAN" }, { "number": 67, "name": "ANGUS LETZING" }, { "number": 10, "name": "AARON SMITH" }, { "number": 4, "name": "BRAIDEN LEONG" }, { "number": 23, "name": "LUCAS ENDERS" }, { "number": 35, "name": "JOSHUA KUBEIL" }, { "number": 40, "name": "KIERAN RIMMER" }, { "number": 25, "name": "ZACK PINTAUDI" }, { "number": 1, "name": "HUGO ANDREWS" }, { "number": 27, "name": "JOE MELLING" }, { "number": 8, "name": "JOHN ROMBO" }, { "number": 12, "name": "WILLIAM  HUTCHINSON " }, { "number": 22, "name": "LACHLAN SCHOEMAKER " }, { "number": 44, "name": "JORDEN HARRIS" }, { "number": 11, "name": "LUKE NALLY" }, { "number": 6, "name": "BEN OGILVIE" }, { "number": 9, "name": "INISH  GUINEY-WHITE" }, { "number": 2, "name": "JAN  BARNARD " }, { "number": 55, "name": "ZACHARY NIJENHUIS" }, { "number": 26, "name": "WILL SCOTT MACKERETH " }, { "number": 24, "name": "JACK RICARDO" }, { "number": 13, "name": "BETHEL LOH" }];
+        
             let jumpers = data.sort(compareFn);
-
-
-
             let d = document;
-            //let table = d.createElement("table");
-            //let tbody = d.createElement("tbody");
-            // let thead = d.createElement("thead");
-            // thead.classList.add("thead-dark");
-            // let headers = ["#", "Player"];
-
             let table = d.getElementById('baseTable');
             let thead = d.getElementById('tableHead');
             let tbody = d.getElementById('tableBody');
 
 
-            // headers.forEach(element => {
-            //     let head = d.createElement("th");
-            //     head.innerHTML = element;
-            //     head.classList.add("text-uppercase");
-            //     thead.appendChild(head);
-            // });
 
-            //table.appendChild(thead);
-            // table.appendChild(tbody);
-            // table.classList.add("table");
-            // table.classList.add("table-striped");
 
             let availableJumbers = [];
 
@@ -109,6 +105,7 @@
                     rowC++;
 
                     row.innerHTML += "<td>" + element.AllocatedJumper + "</td>";
+                    row.innerHTML += "<td>" + element.Role + "</td>";
                     row.innerHTML += "<td>" + element["First Name"] + " " + element["Last Name"] + "</td>";
 
                     if (rowC == 2) {
@@ -144,10 +141,10 @@
                 let e = "";
                 if (!element.Allocted) {
 
-                    if(bold) {
-                    e += "<td class='font-weight-bold'>"
+                    if (bold) {
+                        e += "<td class='font-weight-bold'>"
                     } else {
-                    e += "<td>"
+                        e += "<td>"
                     }
                     bold = !bold;
                     e += element.Number;
@@ -164,7 +161,7 @@
             };
             availableNumbers.innerHTML = string;
             //console.log(string);
-
+            colorTDs()
 
 
         };
@@ -223,6 +220,33 @@
         function forceRefresh() {
             window.location.reload(true);
         }
+
+        function isEven(n) {
+            return (n % 2 == 0);
+        }
+
+
+
+        function colorTDs() {
+            let tds = document.getElementById("tableBody");
+            tds = tds.getElementsByTagName("td");
+            let red = false;
+
+            console.log(tds.length);
+
+            for (let index = 0; index < tds.length; index++) {
+                const element = tds[index];
+                if (red) {
+                    element.classList.add("synnerRed-bg");
+                } else {
+                    "";
+                }
+            }
+            
+
+        }
+
+
     </script>
 </head>
 
@@ -379,7 +403,7 @@
             </div>
         </div>
         <div class="row">
-            
+
             <div class="col-sm-12 col-lg-6 offset-lg-3" id="tableContainer">
                 <table class="table table-striped" id="baseTable">
                     <thead class="thead-dark" id="tableHead">
@@ -388,8 +412,10 @@
                         </tr>
                         <tr>
                             <th>#</th>
+                            <th></th>
                             <th>Player</th>
                             <th>#</th>
+                            <th></th>
                             <th>Player</th>
                         </tr>
                     </thead>
@@ -411,8 +437,10 @@
 
         <div class="row m-4">
             <div class="col-lg-4 offset-lg-4 col-sm-6 offset-sm-3 text-center">
-                <button class="btn btn-primary btn-pill" onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSepo_o16fH_qcN05jCwbI5YxjvDqI5w8rjleNdUupi9Ng-t8Q/viewform?usp=sf_link')">Choose a jumper</button>
-                
+                <button class="btn btn-primary btn-pill"
+                    onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSepo_o16fH_qcN05jCwbI5YxjvDqI5w8rjleNdUupi9Ng-t8Q/viewform?usp=sf_link')">Choose
+                    a jumper</button>
+
             </div>
         </div>
 
