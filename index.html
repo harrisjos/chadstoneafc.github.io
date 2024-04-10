@@ -79,7 +79,7 @@
 
             let availableJumbers = [];
 
-            for (let index = 1; index < 71; index++) {
+            for (let index = 1; index < 61; index++) {
                 let numbers = { Number: index, Allocted: false };
                 availableJumbers.push(numbers);
             };
@@ -107,7 +107,7 @@
 
                     row.innerHTML += "<td>" + element.AllocatedJumper + "</td>";
                     row.innerHTML += "<td>" + element["First Name"] + " " + element["Last Name"] + "</td>";
-                    row.innerHTML += "<td>" + element["Role\r"].replaceAll("\r","").replaceAll("\n","") + "</td>";
+                    row.innerHTML += "<td><b>" + element["Role\r"].replaceAll("\r","").replaceAll("\n","") + "</b></td>";
 
                     if (rowC == 2) {
                         tbody.appendChild(row);
