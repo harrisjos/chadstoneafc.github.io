@@ -123,6 +123,18 @@
 
             };
 
+            if(unallocatedPlayers.length > 0){
+                let unallocatedPlayersString = "<ul>";
+                for (const key in unallocatedPlayers) {
+                    if (Object.hasOwnProperty.call(unallocatedPlayers, key)) {
+                        const element = unallocatedPlayers[key];
+                        unallocatedPlayersString += "<li>" + key + " " + element + "</li>";
+                    }
+                }
+                unallocatedPlayersString += "</ul>";
+                unallocatedPlayersDiv.innerHTML = unallocatedPlayersString;
+            };
+
             if (row != "") {
                 tbody.appendChild(row);
             }
